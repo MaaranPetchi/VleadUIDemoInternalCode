@@ -25,3 +25,4 @@ export class TopnavbarComponent  implements OnInit{
     );
   }
 }
+export class DashboardModule {}

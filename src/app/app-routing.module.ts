@@ -5,7 +5,15 @@ import { LoginComponent } from './Components/login/login.component';
 import { SidenavComponent } from './Components/Sidenavbar/sidenav/sidenav.component';
 import { TopnavbarComponent } from './Components/Topnavbar/topnavbar/topnavbar.component';
 
-const routes: Routes = [{ path: 'login', component: LoginComponent },
+const routes: Routes = [
+    // lazy loaded dashboard module
+    {
+      path: 'dashboard',
+      loadChildren: () => import('./Components/dashboard.module').then(m => m.DashboardModule)
+    },
+    
+    { path: ' ', component: LoginComponent },
+    { path: 'login', component: LoginComponent },
 { path: 'topnavbar', component: TopnavbarComponent },
 { path: 'sidenavbar', component: SidenavComponent },
 { path: 'employee', component: EmployeeComponent },

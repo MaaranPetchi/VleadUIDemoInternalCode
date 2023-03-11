@@ -9,7 +9,7 @@ import { FormsModule } from '@angular/forms';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LoginComponent } from './Components/login/login.component';
-import { TopnavbarComponent } from './Components/Topnavbar/topnavbar/topnavbar.component';
+
 import { EmployeeComponent } from './Components/EmployeeController/employee/employee.component';
 import { SidenavComponent } from './Components/Sidenavbar/sidenav/sidenav.component';
 
@@ -35,11 +35,13 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import {MatSidenavModule} from '@angular/material/sidenav';
 
 import {MatListModule} from '@angular/material/list'; 
+import { DashboardModule } from './Components/dashboard.module';
+
+
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    TopnavbarComponent,
     EmployeeComponent,
    SidenavComponent,
   
@@ -81,8 +83,8 @@ import {MatListModule} from '@angular/material/list';
      MatCheckboxModule,
      MatSidenavModule,
      MatListModule,
-     RouterModule
-     
+     RouterModule,
+     DashboardModule
     ],
   providers: [],
   bootstrap: [AppComponent]
