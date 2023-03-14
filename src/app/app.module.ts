@@ -10,7 +10,7 @@ import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LoginComponent } from './Components/login/login.component';
 
-import { EmployeeComponent } from './Components/EmployeeController/employee/employee.component';
+
 import { SidenavComponent } from './Components/Sidenavbar/sidenav/sidenav.component';
 
 import { CommonModule } from '@angular/common';
@@ -38,11 +38,12 @@ import {MatListModule} from '@angular/material/list';
 import { DashboardModule } from './Components/dashboard.module';
 
 
+
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    EmployeeComponent,
+   
    SidenavComponent,
   
 
@@ -54,8 +55,7 @@ import { DashboardModule } from './Components/dashboard.module';
     NgbModule,
     HttpClientModule,
     FormsModule,
-    BrowserAnimationsModule,
-
+   BrowserAnimationsModule,
      //Angular material
      CommonModule,
      //employeeimports

@@ -1,3 +1,5 @@
+
+
 <mat-sidenav-container autosize>
   <mat-sidenav #sidenav mode="side" opened="isExpanded">
     <mat-nav-list>
@@ -7,7 +9,7 @@
         </mat-icon>
       </mat-list-item>
 
-      <mat-list-item [routerLink]="'dashboard'">
+      <mat-list-item [routerLink]="'employeecontroller'">
         <mat-icon mat-list-icon>home</mat-icon>
         <span *ngIf="isExpanded" class="menu-item">Dashboard</span>
       </mat-list-item>
@@ -36,7 +38,7 @@
   <!-- Content - rendered Content for the current router path into the <router-outlet>, e.g. /dashboard or /info-->
   <mat-sidenav-content>
     <mat-toolbar>
-      <app-topnavbar style="padding-left: 10px;"></app-topnavbar>
+      <app-topnavbar class="topnavbarstyles"></app-topnavbar>
     </mat-toolbar>
     <div class="container">
     <router-outlet></router-outlet>
@@ -44,3 +46,4 @@
   </mat-sidenav-content>
 
 </mat-sidenav-container>
+

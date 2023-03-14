@@ -18,3 +18,17 @@ mat-sidenav-container {
     }
   }
 }
+
+.container,
+.container-lg,
+.container-md,
+.container-sm,
+.container-xl {
+  max-width: 1222px;
+}
+
+
+.topnavbarstyles {
+  margin-left: -16px;
+  width: 100vw;
+}

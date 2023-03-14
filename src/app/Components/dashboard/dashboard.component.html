@@ -1,1 +1,9 @@
-<p>dashboard works!</p>
+<input type="text" [(ngModel)]="firstValue">
+<input type="text" [(ngModel)]="secondValue">
+<input type="text" [(ngModel)]="thirdValue">
+
+<input type="checkbox" [(ngModel)]="isChecked">
+
+<input type="text" [value]="isChecked ? firstValue : ''">
+<input type="text" [value]="isChecked ? secondValue : ''">
+<input type="text" [value]="isChecked ? thirdValue : ''">
