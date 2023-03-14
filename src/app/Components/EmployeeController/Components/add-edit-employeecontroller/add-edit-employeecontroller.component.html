@@ -383,7 +383,7 @@
                         <div class="col">
                             <mat-form-field>
                                 <mat-label>EmployeeRoles</mat-label>
-                                <mat-select ngDefaultControl formControlName="employeeRoles">
+                                <mat-select ngDefaultControl formControlName="employeeRoles"  [formControl]="selectEmployeeRoleControl" multiple>
                                     <mat-option *ngFor="let EmployeeRolesoption of EmployeeRolesoptions"
                                         [value]="EmployeeRolesoption.id">
                                         {{ EmployeeRolesoption.description}}
@@ -395,7 +395,7 @@
                             <form *ngIf="formVisible" (ngSubmit)="newRoleSubmit()">
                                 <label for="name">Role Name:</label>
                                 <input class="form-control" type="text" id="name" name="name"
-                                    [(ngModel)]="formData.newrole">
+                                    [(ngModel)]="formData.description">
 
                                 <!-- add more form fields here as needed -->
                                 <button mat-raised-button color="accent" type="submit">Submit</button> |

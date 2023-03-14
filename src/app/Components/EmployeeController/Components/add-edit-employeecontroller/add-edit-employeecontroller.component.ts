@@ -72,6 +72,10 @@ export class AddEditEmployeecontrollerComponent implements OnInit {
 
   //EmployeeProcess
   selectEmployeeprocessControl = new FormControl();
+  //EmployeeRole
+  selectEmployeeRoleControl = new FormControl();
+
+
   employeeprocessOptions: any[] | any;
   //step validation
   isChecked = false;
@@ -237,7 +241,7 @@ export class AddEditEmployeecontrollerComponent implements OnInit {
       reportingManager2: this.builder.control('', Validators.required),
       reportingLeader2: this.builder.control('', Validators.required),
       proficiency: this.builder.control('', Validators.required),
-      employeeHierachy: this.builder.control('', Validators.required),
+      employeeHierachy: this.builder.control([], Validators.required),
 
     }),
     address: this.builder.group({
@@ -253,7 +257,7 @@ export class AddEditEmployeecontrollerComponent implements OnInit {
       emergencyMobilenumber: this.builder.control('', Validators.required),
       officialemailaddress: this.builder.control('', Validators.required),
       employeeProcess: this.builder.control('', Validators.required),
-      employeeRoles: this.builder.control('', Validators.required),
+      employeeRoles: this.builder.control([], Validators.required),
       personalEmail: this.builder.control('', Validators.required),
     })
   });
@@ -274,8 +278,54 @@ export class AddEditEmployeecontrollerComponent implements OnInit {
   }
 
   onFormSubmit() {
+   const roleValues = [{}];
+    const storingrolevariable = this.EmployeeRolesoptions.filter(x=> {
+      this.Empregister.value.address?.employeeRoles?.forEach((y):any  =>{
+        console.log("Y value is", y);
+        console.log("X value is", x.id);
+        if(x.id == y){
+          console.log("Y value in loop is", y);
+        console.log("X value n loop is", x.id);
+            roleValues.push(
+            {
+              roleDescription: x.description,
+              roleId: x.id,
+              createdBy: 152,
+              updatedBy: 0
+            }
+            );
+            console.log("Role Values", roleValues)
+          return {
+            roleValues
+          }
+        }
+      } )
+    })
+   
+   
+    const storinghierarchyvariable = this.EmployeeHierarchyOptions.filter(x=> {
+      this.Empregister.value.contact?.employeeHierachy?.map( (y):any => {
+        if(x.employeeId == y){
+          return {
+            subEmpId: x.employeeId,
+            subEmpName: x.employeeName,
+            createdBy: 152
+          }
+        }
+      } )
+    })
+   
+
+
+
+   console.log(storinghierarchyvariable)
+   console.log(storingrolevariable)
+
     if (this.Empregister.valid) {
+      
+     
       if (this.data) {
+    
         this._empservice
           .updateEmployee(this.data.id, this.Empregister.value)
           .subscribe({
@@ -288,7 +338,56 @@ export class AddEditEmployeecontrollerComponent implements OnInit {
             },
           });
       } else {
-        this._empservice.addEmployee(this.Empregister.value).subscribe({
+        this._empservice.addEmployee({
+          employeeId: 0,
+          employeeCode:this.Empregister.value.basic?.employeeCode,
+          employeeName: this.Empregister.value.basic?.employeeName,
+          departmentId: this.Empregister.value.basic?.department,
+          designationId:  this.Empregister.value.basic?.destination,
+          dateOfJoining: this.Empregister.value.basic?.doj,
+          dateOfBirth:  this.Empregister.value.basic?.dob,
+          bloodGroup:  this.Empregister.value.basic?.bloodGroup,
+          gender:  this.Empregister.value.basic?.gender,
+          maritalStatus: this.Empregister.value.basic?.martialstatus,
+          companyId: 0,
+          profiencyId: this.Empregister.value.contact?.proficiency,
+          emergencyContactName: this.Empregister.value.address?.emergencyContactName,
+          emergencyContactNo: this.Empregister.value.address?.emergencyMobilenumber,
+          email: this.Empregister.value.address?.officialemailaddress,
+          personalEmail: this.Empregister.value.address?.personalEmail,
+          createdUTC:  '',
+          createdBy: 152,
+          updatedUTC:'',
+          updatedBy: 0,
+          reportingManager1: this.Empregister.value.contact?.reportingManager1,
+          reportLeader1: this.Empregister.value.contact?.reportingLeader1,
+          reportingManager2: this.Empregister.value.contact?.reportingManager2,
+          reportingLeader2: this.Empregister.value.contact?.reportingLeader2,
+          address1: this.Empregister.value.address?.permanentaddress1,
+          address2: this.Empregister.value.address?.permanentaddress2,
+          address3: this.Empregister.value.address?.permanentaddress3,
+          address11: this.Empregister.value.address?.presentaddress1,
+          address22: this.Empregister.value.address?.presentaddress2,
+          address33: this.Empregister.value.address?.presentaddress3,
+          locationId: 0,
+          locationId1: 0,
+          addressType:"Permanent",
+          mobileNo:this.Empregister.value.address?.mobileNumber,
+          phoneNo:this.Empregister.value.address?.phonenum,
+          resignReasons: this.Empregister.value.basic?.resignReasons,
+          dateOfResignation:  this.Empregister.value.basic?.dor,
+          processCode: this.Empregister.value.address?.employeeProcess,
+          result: true,
+          roleDescription: '',
+          isOutsource: this.Empregister.value.basic?.ischecked,
+          isInternetConnection: this.Empregister.value.basic?.internet,
+          isSystem: this.Empregister.value.basic?.system,
+          netWorkType:"",
+          serviceProvider:"",
+          systemConfig:"",
+          empRolesList: storingrolevariable,
+          empHierarchyList: storinghierarchyvariable
+        }).subscribe({
           next: (val: any) => {
             this._coreService.openSnackBar('Employee added successfully');
             this._dialogRef.close(true);
@@ -303,7 +402,15 @@ export class AddEditEmployeecontrollerComponent implements OnInit {
   //Entering new role will store into the database
   formVisible = false;
   formData = {
-    newrole: '',
+      id: 0,
+      description: '',
+      companyId: 0,
+      createdBy: 152,
+      createdUtc: "2023-03-14T11:28:30.034Z",
+      updatedBy: 0,
+      updatedUtc: "2023-03-14T11:28:30.034Z",
+      isActive: true
+    
     // add more form fields here as needed
   };
 
@@ -319,7 +426,7 @@ export class AddEditEmployeecontrollerComponent implements OnInit {
   newRoleSubmit() {
     // Send the form data to the backend to store in the database
     // For example, using Angular's HttpClient module:
-    this.http.post('/api/data', this.formData).subscribe(() => {
+    this.http.post('https://localhost:7208/api/Employee/AddEmpNewRoles', this.formData).subscribe(() => {
       // Show a success message to the user
       alert('Data saved successfully!');
       // Close the form
